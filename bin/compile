@@ -20,9 +20,13 @@ mv $BUILD_DIR /tmp/git-export
 
 cd /tmp/git-export
 echo "removing \`.git' only..."
-cp gitmodules .gitmodules
 find . -name .git | xargs rm -rf
+echo 'removing .profile.d'
 rm -fr .profile.d
+if [ -f gitmodules ] ; then
+  echo 'replacing .gitmodules with  gitmodules'
+  cp gitmodules .gitmodules
+fi
 
 mkdir -p $BUILD_DIR
 mv /tmp/git-export $BUILD_DIR/

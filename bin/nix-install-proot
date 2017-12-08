@@ -60,7 +60,7 @@ EOF
 
 (
   compilehook=$(find $BUILD_DIR/nix/store -name heroku-compile-hook -type f)
-  if [ -x $compilehook ] ; then
+  if [ -x "$compilehook" ] ; then
       topic "Running compile hook at $compilehook"
       source $compilehook
   fi
@@ -68,10 +68,10 @@ EOF
 
 topic "Creating run_in_proot.sh"
 (
-    outapi=$(echo "$OUT" | grep circuithub-api)
+    appout=$(echo "$OUT" | grep $NIX_TARGET)
     cat <<EOF > $BUILD_DIR/bin/run_in_proot.sh
 #!/bin/bash
-export PATH=$outapi/bin:\$PATH
+export PATH=$appout/bin:\$PATH
 CMD=\$1
 \$CMD "\${@:2}"
 EOF
