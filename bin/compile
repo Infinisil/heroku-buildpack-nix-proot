@@ -51,7 +51,9 @@ export REAL_APP_DIR=${REAL_APP_DIR:-/app}
 
   mkdir -p $CACHE_DIR/nix-mnt
   cd $CACHE_DIR/nix-mnt
+	set -x
   fetch nix-${NIX_VERSION}.tar.bz2 https://nixos.org/releases/nix/nix-${NIX_VERSION}/nix-${NIX_VERSION}-x86_64-linux.tar.bz2
+	set +x
   tar xjf nix-${NIX_VERSION}.tar.bz2
   echo "Done extracting." | indent
   rm nix-${NIX_VERSION}.tar.bz2
